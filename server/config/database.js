@@ -1,13 +1,5 @@
 import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
-//import Category from './category.js';
-// import Country from './country.js';
-// import Department from './department.js';
-// import Designation from './designation.js';
-// import Region from './region.js';
-// import Role from './role.js';
-// import State from './state.js';
-// import User from './user.js';
 
 dotenv.config();
 
@@ -18,20 +10,17 @@ const sequelize = new Sequelize(
   {
     host: process.env.DB_HOST,
     dialect: process.env.DB_DIALECT,
-    logging: false, // Set to true for debugging queries
+    logging: true,
   }
 );
 
 (async () => {
   try {
     await sequelize.authenticate();
-    console.log('✅ Database connected successfully!');
+    console.log('Database connected successfully!');
   } catch (error) {
-    console.error('❌ Unable to connect to the database:', error);
+    console.error('Unable to connect to the database:', error);
   }
 })();
 
 export default sequelize;
-// const models = {  Country, Department, Designation, Region, Role, State, User };
-
-// export { sequelize, Country, Department, Designation, Region, Role, State, User };

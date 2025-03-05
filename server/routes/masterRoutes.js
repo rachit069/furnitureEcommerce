@@ -8,9 +8,9 @@ import {
   designationController,
   categoryController,
   roleController,
-  permissionController
+  permissionController 
 } from '../controllers/masterController.js';
-import { authenticateUser, authorizeRoles } from '../middleware/authMiddleware.js';
+import { authenticateUser, authorizeRoles } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
