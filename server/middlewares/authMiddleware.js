@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-import { User, Role } from '../models/database_models.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
