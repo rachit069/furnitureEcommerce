@@ -5,18 +5,9 @@ import { authenticateUser, authorizeRoles } from '../middlewares/authMiddleware.
 const router = express.Router();
 
 // Admin-only routes
-router.get(
-  '/',
-  authenticateUser,
-  authorizeRoles('Admin'), 
-  getAllUsers
-);
+router.get('/', authenticateUser, authorizeRoles('Admin'), getAllUsers );
 
-// User can view own profile, Admin can view any
-router.get(
-  '/:id',
-  authenticateUser,
-  (req, res, next) => {
+router.get('/:id', authenticateUser, (req, res, next) => {
     // Allow access if:
     // 1. User is Admin, OR
     // 2. User is accessing their own profile

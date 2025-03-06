@@ -1,6 +1,6 @@
 import { User } from '../models/database_models.js';
 
-// ✅ Get all users (Only for Admins)
+// Get all users (Only for Admins)
 export const getAllUsers = async (req, res) => {
     try {
         const users = await User.findAll({
@@ -13,7 +13,7 @@ export const getAllUsers = async (req, res) => {
     }
 };
 
-// ✅ Get user by ID
+//  Get user by ID
 export const getUserById = async (req, res) => {
     try {
         const { id } = req.params;
