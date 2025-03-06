@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
-import { User, Role } from '../models/database_models.js';
+import User from '../models/user.js';
+import Role from '../models/role.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -34,7 +35,7 @@ export const authenticateUser = async (req, res, next) => {
   
       next();
     } catch (error) {
-      console.error('🔥 Authentication Error:', error);
+      console.error('Authentication Error:', error);
       return res.status(401).json({ message: 'Invalid Token' });
     }
   };

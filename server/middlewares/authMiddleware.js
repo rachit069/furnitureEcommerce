@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import User from '../models/user.js';
 
 dotenv.config();
 
@@ -37,7 +38,7 @@ export const authenticateUser = async (req, res, next) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    console.log("✅ Authenticated User:", req.user.username);
+    console.log("Authenticated User:", req.user.username);
     next();
   } catch (error) {
     console.error('Authentication Middleware Error:', error);
