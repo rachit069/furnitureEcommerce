@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import User from '../models/user.js';
+import Role from '../models/role.js';
 
 dotenv.config();
 
@@ -40,7 +41,7 @@ export const login = async (req, res) => {
       where: { email },
       include: { model: Role, as: 'role' } // Ensure Role association is included
     });
-    console.log("🔍 User fetched from DB:", user);
+    console.log("User fetched from DB:", user);
     if (!user) return res.status(400).json({ message: 'Invalid email or password' });
 
     // Validate password

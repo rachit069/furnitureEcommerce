@@ -1,6 +1,7 @@
 import sequelize from "./config/database.js";
 import User from "./models/user.js";
 import Role from "./models/role.js";
+import Country from "./models/country.js";
 
 const syncDB = async () => {
   try {
@@ -11,7 +12,6 @@ const syncDB = async () => {
     await Role.bulkCreate([{ name: "admin" }, { name: "user" }], {
       ignoreDuplicates: true,
     });
-    console.log(" Default roles inserted");
   } catch (error) {
     console.error(" Database sync error:", error);
   } finally {
