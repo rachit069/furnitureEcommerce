@@ -43,6 +43,6 @@ const User = sequelize.define(
   }
 );
 
-User.belongsTo(Role, { foreignKey: "roleId" }); // Change foreignKey to roleId
+User.belongsTo(Role, { foreignKey: "roleId" , as:'role'}); 
 
 export default User;

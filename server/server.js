@@ -1,6 +1,9 @@
 import express from 'express';
 import dotenv from 'dotenv';
 
+import { graphqlHTTP } from 'express-graphql';
+import schema from './graphql/schema.js';
+
 import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 
@@ -10,6 +13,10 @@ const app = express();
 // Middleware
 app.use(express.json());
 
+app.use('/graphql', graphqlHTTP({
+  schema,
+  graphiql: true // Enables the GraphiQL UI
+}));
 // Routes
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
