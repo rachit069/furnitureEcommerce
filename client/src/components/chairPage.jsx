@@ -4,7 +4,7 @@ import chair1 from "../assets/chair1.png";
 import chair2 from "../assets/chair2.png";
 import chair3 from "../assets/chair3.png";
 import bed1 from "../assets/bed1.png";
-import table from "../assets/table.png"
+// import table from "../assets/table.png"
 
 const ChairPages = () => {
   const [activeProduct, setActiveProduct] = useState(0);
