@@ -12,7 +12,7 @@ const HomeSection = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
+  // hello
   return (
     <div className="min-h-screen font-['Poppins',sans-serif] bg-[#1a202c] text-white overflow-hidden relative">
       {/* Gradient Background Overlay (Adjusted for blue) */}
@@ -33,6 +33,7 @@ const HomeSection = () => {
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-300">We</span>
           <span className="text-white">Furn</span>
         </div>
+        
 
         {/* Navigation Links */}
         <nav className="hidden md:flex gap-16 text-lg font-medium">
