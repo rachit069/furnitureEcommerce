@@ -1,9 +1,8 @@
-// InteriorDesignPage.jsx
 import React from 'react';
 
 const InteriorDesignPage = () => {
   return (
-    <div className="w-full pt-16 pb-24 px-4 bg-gradient-to-b from-[#18181A] to-[#222224]">
+    <div className="w-full pt-16 pb-24 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Left side - Images Section */}
@@ -14,7 +13,7 @@ const InteriorDesignPage = () => {
                 <div key={index} className="w-1.5 h-1.5 rounded-full bg-yellow-300 opacity-60"></div>
               ))}
             </div>
-            
+
             {/* Main Image Grid */}
             <div className="grid grid-cols-2 gap-4 relative z-10">
               {/* Large image */}
@@ -25,7 +24,7 @@ const InteriorDesignPage = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              
+
               {/* Top small image */}
               <div className="col-span-1 rounded-xl overflow-hidden h-[190px] border border-gray-800">
                 <img 
@@ -34,7 +33,7 @@ const InteriorDesignPage = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              
+
               {/* Bottom small image */}
               <div className="col-span-1 rounded-xl overflow-hidden h-[190px] border border-gray-800">
                 <img 
@@ -45,45 +44,37 @@ const InteriorDesignPage = () => {
               </div>
             </div>
           </div>
-          
+
           {/* Right side - Content Section */}
           <div className="w-full lg:w-2/5">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
               We help you make<br />
               Modern Interior Design
             </h2>
-            
-            <p className="text-gray-300 mb-8">
+
+            <p className="text-gray-700 mb-8">
               Transform your living space into a masterpiece of contemporary design. Our expert designers 
               combine aesthetics with functionality to create interiors that reflect your personality and 
               lifestyle. From concept to completion, we handle every detail to deliver spaces that inspire.
             </p>
-            
+
             {/* Bullet points */}
             <div className="space-y-4 mb-8">
-              <div className="flex items-start space-x-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-yellow-300 mt-2"></div>
-                <p className="text-gray-400 flex-1">Personalized consultation to understand your vision and requirements</p>
-              </div>
-              
-              <div className="flex items-start space-x-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-yellow-300 mt-2"></div>
-                <p className="text-gray-400 flex-1">Curated selection of premium furniture and decor elements</p>
-              </div>
-              
-              <div className="flex items-start space-x-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-yellow-300 mt-2"></div>
-                <p className="text-gray-400 flex-1">Detailed 3D visualizations to preview your space before implementation</p>
-              </div>
-              
-              <div className="flex items-start space-x-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-yellow-300 mt-2"></div>
-                <p className="text-gray-400 flex-1">Comprehensive project management from design to installation</p>
-              </div>
+              {[
+                "Personalized consultation to understand your vision and requirements",
+                "Curated selection of premium furniture and decor elements",
+                "Detailed 3D visualizations to preview your space before implementation",
+                "Comprehensive project management from design to installation"
+              ].map((point, idx) => (
+                <div className="flex items-start space-x-2" key={idx}>
+                  <div className="w-1.5 h-1.5 rounded-full bg-yellow-300 mt-2"></div>
+                  <p className="text-gray-600 flex-1">{point}</p>
+                </div>
+              ))}
             </div>
-            
+
             {/* Explore button */}
-            <button className="bg-white text-gray-900 px-8 py-3 rounded-full hover:bg-gray-200 transition-colors">
+            <button className="bg-blue-500 text-white px-8 py-3 rounded-full hover:bg-blue-600 transition-colors">
               Explore
             </button>
           </div>
