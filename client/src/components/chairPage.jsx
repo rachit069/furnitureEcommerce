@@ -1,16 +1,286 @@
+// import React, { useState } from "react";
+// import chair1 from "../assets/chair1.png";
+// import chair2 from "../assets/chair2.png";
+// import chair3 from "../assets/chair3.png";
+// import bed1 from "../assets/bed1.png";
+
+// const ChairPages = () => {
+//   const [activeProduct, setActiveProduct] = useState(0);
+//   const [category, setCategory] = useState("chairs");
+
+//   const allProducts = {
+//     chairs: [
+//       {
+//         id: 1,
+//         name: "Nordic Chair",
+//         price: 50.00,
+//         image: chair1,
+//         description: "Minimalist design with premium comfort",
+//         material: "Wool blend upholstery with wooden legs",
+//         colors: ["#E0D9D2", "#8B8378", "#4B3621"],
+//         rating: 4.8,
+//         tag: "bestseller"
+//       },
+//       {
+//         id: 2,
+//         name: "Kruzo Aero Chair",
+//         price: 78.00,
+//         image: chair2,
+//         description: "Modern swivel design with plush cushioning",
+//         material: "Brushed metal base with fabric upholstery",
+//         colors: ["#D3D3D3", "#A9A9A9", "#5F5F5F"],
+//         rating: 4.9,
+//         tag: "new"
+//       },
+//       {
+//         id: 3,
+//         name: "Ergonomic Chair",
+//         price: 43.00,
+//         image: chair3,
+//         description: "Designed for optimal posture and support",
+//         material: "Sustainable wood with eco-friendly fabric",
+//         colors: ["#636F57", "#8F9779", "#BDC9A7"],
+//         rating: 4.7
+//       }
+//     ],
+//     beds: [
+//       {
+//         id: 4,
+//         name: "Luxury Bed Frame",
+//         price: 199.00,
+//         image: bed1,
+//         description: "Elegant design with sturdy construction",
+//         material: "Solid oak wood with premium finish",
+//         colors: ["#5C4033", "#8B4513", "#A0522D"],
+//         rating: 4.9,
+//         tag: "premium"
+//       }
+//     ]
+//   };
+
+//   const products = allProducts[category] || allProducts.chairs;
+
+//   const nextProduct = () => setActiveProduct((prev) => (prev === products.length - 1 ? 0 : prev + 1));
+//   const prevProduct = () => setActiveProduct((prev) => (prev === 0 ? products.length - 1 : prev - 1));
+//   const goToProduct = (index) => setActiveProduct(index);
+//   const changeCategory = (newCategory) => {
+//     setCategory(newCategory);
+//     setActiveProduct(0);
+//   };
+
+//   return (
+//     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 pt-24 pb-12 px-6 md:px-20 text-white font-['Poppins', sans-serif] relative overflow-hidden">
+//       <div className="max-w-7xl mx-auto">
+//         <div className="text-center mb-20">
+//           <h1 className="text-5xl md:text-6xl font-extrabold mb-4 tracking-tight">
+//             Explore Our <span className="text-indigo-400">Collections</span>
+//           </h1>
+//           <p className="text-gray-400 max-w-xl mx-auto leading-relaxed">
+//             Discover meticulously crafted furniture that blends modern aesthetics with unparalleled comfort and quality.
+//           </p>
+//         </div>
+
+//         <div className="flex justify-center mb-16">
+//           <div className="inline-flex bg-black/50 backdrop-blur-md p-2 rounded-full shadow-lg border border-gray-700">
+//             <button
+//               onClick={() => changeCategory("chairs")}
+//               className={`px-8 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
+//                 category === "chairs"
+//                   ? "bg-indigo-500 text-white shadow-md"
+//                   : "text-gray-400 hover:text-indigo-300 hover:bg-black/70"
+//               }`}
+//             >
+//               Chairs
+//             </button>
+//             <button
+//               onClick={() => changeCategory("beds")}
+//               className={`px-8 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
+//                 category === "beds"
+//                   ? "bg-indigo-500 text-white shadow-md"
+//                   : "text-gray-400 hover:text-indigo-300 hover:bg-black/70"
+//               }`}
+//             >
+//               Beds
+//             </button>
+//             <button className="px-8 py-3 rounded-full text-sm font-semibold text-gray-500 hover:text-indigo-300 hover:bg-black/70 transition-colors">
+//               Tables <span className="opacity-50">(Coming Soon)</span>
+//             </button>
+//           </div>
+//         </div>
+
+//         <div className="flex flex-col lg:flex-row items-center justify-between gap-20">
+//           <div className="w-full lg:w-1/3 space-y-8">
+//             <div className="relative">
+//               <h2 className="text-4xl md:text-5xl font-bold leading-tight text-indigo-200 tracking-wide">
+//                 Crafted with <span className="text-indigo-400">Exceptional</span> Materials.
+//               </h2>
+//             </div>
+//             <p className="text-gray-400 leading-relaxed text-lg">
+//               Experience the difference of furniture made with premium materials, ensuring lasting quality and timeless style.
+//             </p>
+
+//             <div className="pt-6">
+//               <button className="group relative overflow-hidden bg-indigo-500 text-white px-10 py-4 rounded-full font-semibold shadow-lg transition-all duration-300 hover:shadow-indigo-400/30 hover:shadow-xl">
+//                 <span className="relative z-10 transition-colors duration-300">Explore Collection</span>
+//                 <span className="absolute inset-0 bg-indigo-600 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500"></span>
+//                 <svg
+//                   xmlns="http://www.w3.org/2000/svg"
+//                   fill="none"
+//                   viewBox="0 0 24 24"
+//                   strokeWidth={1.5}
+//                   stroke="currentColor"
+//                   className="w-5 h-5 absolute top-1/2 right-4 -translate-y-1/2 group-hover:translate-x-2 transition-transform duration-300"
+//                 >
+//                   <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h15.75m-16.5 0a2.25 2.25 0 01-2.25-2.25V6.75a2.25 2.25 0 012.25-2.25h15a2.25 2.25 0 012.25 2.25v2.25a2.25 2.25 0 01-2.25 2.25H4.5z" />
+//                 </svg>
+//               </button>
+//             </div>
+
+//             <div className="pt-8 flex items-center">
+//               <div className="h-px bg-gray-700 flex-grow"></div>
+//               <div className="px-4 text-sm text-gray-500">Showing {products.length} items</div>
+//               <div className="h-px bg-gray-700 flex-grow"></div>
+//             </div>
+
+//             <div className="flex flex-wrap gap-3 mt-4">
+//               <span className="text-sm text-gray-500">Quick filters:</span>
+//               <button className="px-4 py-2 text-xs rounded-full bg-gray-800 text-gray-400 hover:bg-indigo-700 hover:text-indigo-300 transition-colors font-medium">
+//                 New Arrivals
+//               </button>
+//               <button className="px-4 py-2 text-xs rounded-full bg-gray-800 text-gray-400 hover:bg-indigo-700 hover:text-indigo-300 transition-colors font-medium">
+//                 Bestsellers
+//               </button>
+//               <button className="px-4 py-2 text-xs rounded-full bg-gray-800 text-gray-400 hover:bg-indigo-700 hover:text-indigo-300 transition-colors font-medium">
+//                 Price: Low to High
+//               </button>
+//             </div>
+//           </div>
+
+//           <div className="w-full lg:w-2/3 relative">
+//             <div className="flex flex-wrap md:flex-nowrap gap-8">
+//               {products.map((product, index) => (
+//                 <div
+//                   key={product.id}
+//                   className={`flex-1 min-w-[280px] transition-all duration-500 transform ${
+//                     index === activeProduct ? "scale-105 opacity-100 z-20 shadow-2xl" : "scale-90 opacity-60 blur-sm md:blur-none"
+//                   }`}
+//                 >
+//                   <div
+//                     className={`rounded-3xl p-8 h-full flex flex-col relative overflow-hidden bg-black/70 border border-gray-700 backdrop-blur-md ${
+//                       index === activeProduct ? "border-indigo-600" : ""
+//                     }`}
+//                   >
+//                     {product.tag && (
+//                       <div className="absolute top-6 left-6 z-30">
+//                         <div
+//                           className={`text-xs px-3 py-1 rounded-full font-semibold uppercase tracking-wide shadow-md ${
+//                             product.tag === "new" ? "bg-blue-600 text-blue-100" : (product.tag === "bestseller" ? "bg-green-600 text-green-100" : "bg-yellow-600 text-yellow-100")
+//                           }`}
+//                         >
+//                           {product.tag}
+//                         </div>
+//                       </div>
+//                     )}
+
+//                     <div className="mb-6 rounded-2xl bg-gray-800/50 p-6 h-[240px] flex items-center justify-center relative overflow-hidden">
+//                       <img
+//                         src={product.image}
+//                         alt={product.name}
+//                         className="h-full w-auto mx-auto object-contain transition-all duration-500 group-hover:scale-105 drop-shadow-xl"
+//                       />
+//                       <button
+//                         className={`absolute bottom-4 right-4 w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300 ${
+//                           index === activeProduct ? "bg-indigo-500 text-white hover:bg-indigo-600" : "bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white"
+//                         }`}
+//                         onClick={() => setActiveProduct(index)}
+//                       >
+//                         <svg
+//                           xmlns="http://www.w3.org/2000/svg"
+//                           fill="none"
+//                           viewBox="0 0 24 24"
+//                           strokeWidth={1.5}
+//                           stroke="currentColor"
+//                           className="w-5 h-5"
+//                         >
+//                           <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+//                         </svg>
+//                       </button>
+//                     </div>
+
+//                     <div className="mt-auto flex-grow">
+//                       <h3 className="text-xl font-semibold text-gray-200 mb-2">{product.name}</h3>
+//                       <p className="text-sm text-gray-400 leading-relaxed mb-4">{product.description}</p>
+//                       <div className="flex justify-between items-center">
+//                         <span className="font-bold text-xl text-indigo-300">${product.price}</span>
+//                         <span className="text-yellow-400 text-sm">⭐ {product.rating}</span>
+//                       </div>
+//                     </div>
+//                   </div>
+//                 </div>
+//               ))}
+//             </div>
+
+//             <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-4 mt-12">
+//               <button
+//                 onClick={prevProduct}
+//                 className="text-gray-500 hover:text-indigo-300 transition-colors focus:outline-none"
+//               >
+//                 <svg
+//                   xmlns="http://www.w3.org/2000/svg"
+//                   fill="none"
+//                   viewBox="0 0 24 24"
+//                   strokeWidth={1.5}
+//                   stroke="currentColor"
+//                   className="w-7 h-7"
+//                 >
+//                   <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+//                 </svg>
+//               </button>
+//               {products.map((_, index) => (
+//                 <button
+//                   key={index}
+//                   className={`w-3 h-3 rounded-full transition-colors duration-300 ${
+//                     index === activeProduct ? "bg-indigo-400" : "bg-gray-700 hover:bg-gray-600"
+//                   }`}
+//                   onClick={() => goToProduct(index)}
+//                 ></button>
+//               ))}
+//               <button
+//                 onClick={nextProduct}
+//                 className="text-gray-500 hover:text-indigo-300 transition-colors focus:outline-none"
+//               >
+//                 <svg
+//                   xmlns="http://www.w3.org/2000/svg"
+//                   fill="none"
+//                   viewBox="0 0 24 24"
+//                   strokeWidth={1.5}
+//                   stroke="currentColor"
+//                   className="w-7 h-7"
+//                 >
+//                   <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+//                 </svg>
+//               </button>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default ChairPages;
+
+
 import React, { useState } from "react";
-// Import images from assets
 import chair1 from "../assets/chair1.png";
 import chair2 from "../assets/chair2.png";
 import chair3 from "../assets/chair3.png";
 import bed1 from "../assets/bed1.png";
-// import table from "../assets/table.png"
 
 const ChairPages = () => {
   const [activeProduct, setActiveProduct] = useState(0);
-  const [category, setCategory] = useState("chairs"); // New state for category filtering
-  
-  // Product data with actual images
+  const [category, setCategory] = useState("chairs");
+
   const allProducts = {
     chairs: [
       {
@@ -39,7 +309,7 @@ const ChairPages = () => {
         id: 3,
         name: "Ergonomic Chair",
         price: 43.00,
-        image: chair3, // Using chair3 as requested
+        image: chair3,
         description: "Designed for optimal posture and support",
         material: "Sustainable wood with eco-friendly fabric",
         colors: ["#636F57", "#8F9779", "#BDC9A7"],
@@ -61,285 +331,208 @@ const ChairPages = () => {
     ]
   };
 
-  // Get current category products
   const products = allProducts[category] || allProducts.chairs;
 
-  // Handle navigation
-  const nextProduct = () => {
-    setActiveProduct((prev) => (prev === products.length - 1 ? 0 : prev + 1));
-  };
-
-  const prevProduct = () => {
-    setActiveProduct((prev) => (prev === 0 ? products.length - 1 : prev - 1));
-  };
-
-  // Handle dot navigation
-  const goToProduct = (index) => {
-    setActiveProduct(index);
-  };
-
-  // Handle category change
+  const nextProduct = () => setActiveProduct((prev) => (prev === products.length - 1 ? 0 : prev + 1));
+  const prevProduct = () => setActiveProduct((prev) => (prev === 0 ? products.length - 1 : prev - 1));
+  const goToProduct = (index) => setActiveProduct(index);
   const changeCategory = (newCategory) => {
     setCategory(newCategory);
-    setActiveProduct(0); // Reset to first product when changing category
+    setActiveProduct(0);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#18181A] to-[#222224] pt-24 pb-0 px-6 md:px-20 text-white font-['Poppins',sans-serif] relative overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute w-[500px] h-[500px] rounded-full bg-[#444]/10 blur-[100px] -top-20 -left-20"></div>
-        <div className="absolute w-[600px] h-[600px] rounded-full bg-[#222]/20 blur-[150px] bottom-0 right-0"></div>
-        <div className="absolute w-[300px] h-[300px] rounded-full bg-[#777]/5 blur-[100px] top-1/3 right-1/3"></div>
-        
-        {/* Grid pattern */}
-        <div className="absolute bottom-10 right-10 grid grid-cols-8 gap-2 opacity-10">
-          {Array.from({ length: 64 }).map((_, i) => (
-            <span key={i} className="w-2 h-2 rounded-full bg-gray-300"></span>
-          ))}
-        </div>
-      </div>
-      
-      {/* Content container */}
+    <div className="min-h-screen bg-white pt-24 pb-12 px-6 md:px-20 text-black font-['Poppins', sans-serif] relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        {/* Section heading */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-3">Our Collections</h1>
-          <p className="text-gray-400 max-w-xl mx-auto">Explore our carefully curated selection of premium furniture designed for modern living.</p>
+        <div className="text-center mb-20">
+          <h1 className="text-5xl md:text-6xl font-extrabold mb-4 tracking-tight text-gray-900">
+            Explore Our <span className="text-indigo-600">Collections</span>
+          </h1>
+          <p className="text-gray-500 max-w-xl mx-auto leading-relaxed">
+            Discover meticulously crafted furniture that blends modern aesthetics with unparalleled comfort and quality.
+          </p>
         </div>
-      
-        {/* Category selector */}
+
         <div className="flex justify-center mb-16">
-          <div className="inline-flex bg-[#2C2C30]/70 backdrop-blur-sm p-1.5 rounded-full shadow-lg border border-gray-700">
-            <button 
+          <div className="inline-flex bg-gray-100 p-2 rounded-full shadow-lg border border-gray-300">
+            <button
               onClick={() => changeCategory("chairs")}
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                category === "chairs" 
-                  ? "bg-gradient-to-r from-gray-700 to-gray-900 text-white shadow-md border border-gray-600" 
-                  : "text-gray-400 hover:text-white hover:bg-white/5"
+              className={`px-8 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
+                category === "chairs"
+                  ? "bg-indigo-600 text-white shadow-md"
+                  : "text-gray-500 hover:text-indigo-600 hover:bg-gray-200"
               }`}
             >
               Chairs
             </button>
-            <button 
+            <button
               onClick={() => changeCategory("beds")}
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                category === "beds" 
-                  ? "bg-gradient-to-r from-gray-700 to-gray-900 text-white shadow-md border border-gray-600" 
-                  : "text-gray-400 hover:text-white hover:bg-white/5"
+              className={`px-8 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
+                category === "beds"
+                  ? "bg-indigo-600 text-white shadow-md"
+                  : "text-gray-500 hover:text-indigo-600 hover:bg-gray-200"
               }`}
             >
               Beds
             </button>
-            <button 
-              className="px-6 py-2 rounded-full text-sm font-medium text-gray-500"
-            >
-              Tables
+            <button className="px-8 py-3 rounded-full text-sm font-semibold text-gray-500 hover:text-indigo-600 hover:bg-gray-200 transition-colors">
+              Tables <span className="opacity-50">(Coming Soon)</span>
             </button>
           </div>
         </div>
-      
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
-          {/* Left content */}
-          <div className="w-full lg:w-1/3 space-y-6 z-10">
+
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-20">
+          <div className="w-full lg:w-1/3 space-y-8">
             <div className="relative">
-              <div className="absolute -left-3 top-0 w-1 h-12 bg-gradient-to-b from-gray-400 to-gray-600"></div>
-              <h2 className="text-4xl md:text-5xl font-bold leading-tight">
-                Crafted with <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-300 to-gray-100">excellent</span> material.
+              <h2 className="text-4xl md:text-5xl font-bold leading-tight text-gray-800 tracking-wide">
+                Crafted with <span className="text-indigo-600">Exceptional</span> Materials.
               </h2>
             </div>
-            
-            <p className="text-gray-400 leading-relaxed">
-              Donec mattis porta eros, aliquet finibus risus interdum at. Nulla vivethe as it was for us to know what was to be done.
+            <p className="text-gray-500 leading-relaxed text-lg">
+              Experience the difference of furniture made with premium materials, ensuring lasting quality and timeless style.
             </p>
-            
+
             <div className="pt-6">
-              <button className="group relative overflow-hidden bg-gray-200 text-gray-900 px-8 py-3 rounded-full font-medium shadow-lg transition-all duration-300 hover:shadow-gray-400/10 hover:shadow-xl">
-                <span className="relative z-10 group-hover:text-white transition-colors duration-300">Explore</span>
-                <span className="absolute inset-0 bg-gradient-to-r from-gray-700 to-gray-900 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500"></span>
+              <button className="group relative overflow-hidden bg-indigo-600 text-white px-10 py-4 rounded-full font-semibold shadow-lg transition-all duration-300 hover:shadow-indigo-400/30 hover:shadow-xl">
+                <span className="relative z-10 transition-colors duration-300">Explore Collection</span>
+                <span className="absolute inset-0 bg-indigo-700 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500"></span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-5 h-5 absolute top-1/2 right-4 -translate-y-1/2 group-hover:translate-x-2 transition-transform duration-300"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h15.75m-16.5 0a2.25 2.25 0 01-2.25-2.25V6.75a2.25 2.25 0 012.25-2.25h15a2.25 2.25 0 012.25 2.25v2.25a2.25 2.25 0 01-2.25 2.25H4.5z" />
+                </svg>
               </button>
             </div>
-            
-            {/* Product count */}
+
             <div className="pt-8 flex items-center">
-              <div className="h-px bg-gray-800 flex-grow"></div>
-              <div className="px-4 text-sm text-gray-500">Showing {products.length} products</div>
-              <div className="h-px bg-gray-800 flex-grow"></div>
+              <div className="h-px bg-gray-300 flex-grow"></div>
+              <div className="px-4 text-sm text-gray-500">Showing {products.length} items</div>
+              <div className="h-px bg-gray-300 flex-grow"></div>
             </div>
-            
-            {/* Quick filter */}
-            <div className="flex flex-wrap gap-2">
-              <span className="text-sm text-gray-500 mr-2">Quick filters:</span>
-              <button className="px-3 py-1 text-xs rounded-full bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-gray-300 transition-colors">
-                New arrivals
+
+            <div className="flex flex-wrap gap-3 mt-4">
+              <span className="text-sm text-gray-500">Quick filters:</span>
+              <button className="px-4 py-2 text-xs rounded-full bg-gray-200 text-gray-600 hover:bg-indigo-200 hover:text-indigo-700 transition-colors font-medium">
+                New Arrivals
               </button>
-              <button className="px-3 py-1 text-xs rounded-full bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-gray-300 transition-colors">
+              <button className="px-4 py-2 text-xs rounded-full bg-gray-200 text-gray-600 hover:bg-indigo-200 hover:text-indigo-700 transition-colors font-medium">
                 Bestsellers
               </button>
-              <button className="px-3 py-1 text-xs rounded-full bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-gray-300 transition-colors">
+              <button className="px-4 py-2 text-xs rounded-full bg-gray-200 text-gray-600 hover:bg-indigo-200 hover:text-indigo-700 transition-colors font-medium">
                 Price: Low to High
               </button>
             </div>
           </div>
-          
-          {/* Product carousel */}
-          <div className="w-full lg:w-2/3 z-10">
-            <div className="relative">
-              {/* Products row with animation */}
-              <div className="flex flex-wrap md:flex-nowrap gap-6 transition-all duration-500">
-                {products.map((product, index) => (
-                  <div 
-                    key={product.id}
-                    className={`flex-1 min-w-[280px] transition-all duration-700 transform
-                      ${index === activeProduct 
-                        ? 'scale-100 opacity-100 z-20' 
-                        : 'scale-95 opacity-50'
-                      }
-                    `}
+
+          <div className="w-full lg:w-2/3 relative">
+            <div className="flex flex-wrap md:flex-nowrap gap-8">
+              {products.map((product, index) => (
+                <div
+                  key={product.id}
+                  className={`flex-1 min-w-[280px] transition-all duration-500 transform ${
+                    index === activeProduct ? "scale-105 opacity-100 z-20 shadow-xl" : "scale-90 opacity-60 blur-sm md:blur-none"
+                  }`}
+                >
+                  <div
+                    className={`rounded-3xl p-8 h-full flex flex-col relative overflow-hidden bg-white border border-gray-200 shadow-sm ${
+                      index === activeProduct ? "border-indigo-400 shadow-md" : ""
+                    }`}
                   >
-                    <div 
-                      className={`
-                        rounded-3xl p-6 h-full flex flex-col relative overflow-hidden group
-                        ${index === activeProduct 
-                          ? 'bg-gradient-to-br from-[#2C2C30] to-[#3A3A3E] shadow-xl border border-gray-700' 
-                          : 'bg-[#2C2C30]/70 border border-gray-800'
-                        }
-                      `}
-                    >
-                      {/* Product tag */}
-                      {product.tag && (
-                        <div className="absolute top-4 left-4 z-20">
-                          <div className={`
-                            text-xs px-2 py-1 rounded-full font-medium uppercase tracking-wide
-                            ${product.tag === 'new' ? 'bg-blue-900/30 text-blue-400 border border-blue-700/30' : 
-                              product.tag === 'bestseller' ? 'bg-gray-900/30 text-gray-300 border border-gray-500/30' :
-                              product.tag === 'premium' ? 'bg-gray-900/30 text-gray-300 border border-gray-500/30' : ''}
-                          `}>
-                            {product.tag}
-                          </div>
-                        </div>
-                      )}
-                      
-                      {/* Image container */}
-                      <div className="mb-4 rounded-2xl bg-gradient-to-br from-[#333] to-[#222] p-4 h-[220px] flex items-center justify-center relative overflow-hidden">
-                        {/* Actual image */}
-                        <img 
-                          src={product.image} 
-                          alt={product.name} 
-                          className="h-full w-auto mx-auto object-contain transition-all duration-500 group-hover:scale-105 drop-shadow-2xl" 
-                        />
-                        
-                        {/* Quick view button */}
-                        <button 
-                          className={`
-                            absolute bottom-3 right-3 w-8 h-8 rounded-full flex items-center justify-center
-                            ${index === activeProduct 
-                              ? 'bg-white text-gray-900' 
-                              : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                            }
-                          `}
-                          onClick={() => setActiveProduct(index)}
+                    {product.tag && (
+                      <div className="absolute top-6 left-6 z-30">
+                        <div
+                          className={`text-xs px-3 py-1 rounded-full font-semibold uppercase tracking-wide shadow-md ${
+                            product.tag === "new" ? "bg-blue-200 text-blue-700" : (product.tag === "bestseller" ? "bg-green-200 text-green-700" : "bg-yellow-200 text-yellow-700")
+                          }`}
                         >
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                          </svg>
-                        </button>
-                        
-                        {/* Hover actions */}
-                        <div className="absolute inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                          <div className="flex gap-2">
-                            <button className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-gray-700 transition-colors">
-                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                              </svg>
-                            </button>
-                            <button className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-gray-700 transition-colors">
-                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-                              </svg>
-                            </button>
-                          </div>
+                          {product.tag}
                         </div>
                       </div>
-                      
-                      {/* Product info */}
-                      <div className="mt-2 flex-grow">
-                        <h3 className="text-lg font-medium text-white mb-1">{product.name}</h3>
-                        <p className="text-gray-400 text-sm line-clamp-2 mb-2">{product.description}</p>
-                        
-                        {/* Material info */}
-                        <div className="mb-3">
-                          <p className="text-xs text-gray-500">Material: <span className="text-gray-400">{product.material}</span></p>
-                        </div>
-                        
-                        {/* Colors */}
-                        <div className="mb-4">
-                          <p className="text-xs text-gray-500 mb-1.5">Colors:</p>
-                          <div className="flex gap-1.5">
-                            {product.colors.map((color, i) => (
-                              <div key={i} className="w-6 h-6 rounded-full cursor-pointer border border-gray-700 transition-transform hover:scale-110" style={{ backgroundColor: color }}></div>
-                            ))}
-                          </div>
-                        </div>
-                        
-                        {/* Rating */}
-                        <div className="flex items-center mb-3">
-                          <div className="flex">
-                            {[...Array(5)].map((_, i) => (
-                              <svg key={i} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" 
-                                className={`w-4 h-4 ${i < Math.floor(product.rating) ? 'text-yellow-400' : i < product.rating ? 'text-gradient-to-r from-yellow-400 to-gray-500' : 'text-gray-600'}`}>
-                                <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clipRule="evenodd" />
-                              </svg>
-                            ))}
-                          </div>
-                          <span className="text-gray-400 text-xs ml-1">({product.rating})</span>
-                        </div>
-                      </div>
-                      
-                      <div className="mt-auto pt-4 flex items-center justify-between border-t border-gray-700">
-                        <div className="text-white font-medium">${product.price.toFixed(2)}</div>
-                        <button className="bg-white hover:bg-gray-100 text-gray-900 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200">
-                          Add to cart
-                        </button>
+                    )}
+
+                    <div className="mb-6 rounded-2xl bg-gray-100 p-6 h-[240px] flex items-center justify-center relative overflow-hidden">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="h-full w-auto mx-auto object-contain transition-all duration-500 group-hover:scale-105 drop-shadow-xl"
+                      />
+                      <button
+                        className={`absolute bottom-4 right-4 w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300 ${
+                          index === activeProduct ? "bg-indigo-500 text-white hover:bg-indigo-600" : "bg-gray-300 text-gray-700 hover:bg-gray-400 hover:text-black"
+                        }`}
+                        onClick={() => setActiveProduct(index)}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-5 h-5"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+                      </button>
+                    </div>
+
+                    <div className="mt-auto flex-grow">
+                      <h3 className="text-xl font-semibold text-gray-800 mb-2">{product.name}</h3>
+                      <p className="text-sm text-gray-500 leading-relaxed mb-4">{product.description}</p>
+                      <div className="flex justify-between items-center">
+                        <span className="font-bold text-xl text-indigo-600">${product.price}</span>
+                        <span className="text-yellow-400 text-sm">⭐ {product.rating}</span>
                       </div>
                     </div>
                   </div>
-                ))}
-              </div>
-              
-              {/* Navigation dots */}
-              <div className="flex justify-center mt-8 gap-1.5">
-                {products.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => goToProduct(index)}
-                    className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                      index === activeProduct ? 'bg-white scale-125' : 'bg-gray-600 hover:bg-gray-500'
-                    }`}
-                    aria-label={`Go to product ${index + 1}`}
-                  />
-                ))}
-              </div>
-              
-              {/* Navigation arrows */}
-              <div className="flex justify-between mt-6">
-                <button 
-                  onClick={prevProduct}
-                  className="w-10 h-10 rounded-full bg-gray-800/80 backdrop-blur flex items-center justify-center text-gray-300 hover:bg-gray-700 transition-colors"
+                </div>
+              ))}
+            </div>
+
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-4 mt-12">
+              <button
+                onClick={prevProduct}
+                className="text-gray-500 hover:text-indigo-600 transition-colors focus:outline-none"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-7 h-7"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                  </svg>
-                </button>
-                <button 
-                  onClick={nextProduct}
-                  className="w-10 h-10 rounded-full bg-gray-800/80 backdrop-blur flex items-center justify-center text-gray-300 hover:bg-gray-700 transition-colors"
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                </svg>
+              </button>
+              {products.map((_, index) => (
+                <button
+                  key={index}
+                  className={`w-3 h-3 rounded-full transition-colors duration-300 ${
+                    index === activeProduct ? "bg-indigo-600" : "bg-gray-300 hover:bg-gray-400"
+                  }`}
+                  onClick={() => goToProduct(index)}
+                ></button>
+              ))}
+              <button
+                onClick={nextProduct}
+                className="text-gray-500 hover:text-indigo-600 transition-colors focus:outline-none"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-7 h-7"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                  </svg>
-                </button>
-              </div>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+              </button>
             </div>
           </div>
         </div>
