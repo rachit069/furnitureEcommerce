@@ -4,6 +4,7 @@ import couchImage from "../assets/couch.png";
 const HomeSection = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeLink, setActiveLink] = useState("Home");
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -12,6 +13,17 @@ const HomeSection = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!e.target.closest(".profile-dropdown")) {
+        setShowProfileMenu(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   // hello
   return (
     <div className="min-h-screen font-['Poppins',sans-serif] bg-[#1a202c] text-white overflow-hidden relative">
@@ -25,15 +37,14 @@ const HomeSection = () => {
       </div>
 
       {/* Navbar */}
-      <header className={`px-8 md:px-20 py-6 flex items-center justify-between fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-[#1a202c]/80 backdrop-blur-md shadow-lg border-b border-b-gray-800' : 'bg-transparent'
-      }`}>
+      <header className={`px-8 md:px-20 py-6 flex items-center justify-between fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-[#1a202c]/80 backdrop-blur-md shadow-lg border-b border-b-gray-800' : 'bg-transparent'
+        }`}>
         {/* Logo */}
         <div className="text-3xl font-bold flex items-center relative">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-300">We</span>
           <span className="text-white">Furn</span>
         </div>
-        
+
 
         {/* Navigation Links */}
         <nav className="hidden md:flex gap-16 text-lg font-medium">
@@ -43,11 +54,10 @@ const HomeSection = () => {
                 key={item}
                 href="#"
                 onClick={() => setActiveLink(item)}
-                className={`relative px-2 py-1 transition-all duration-300 ${
-                  activeLink === item
-                    ? 'text-blue-400'
-                    : 'text-gray-300 hover:text-white'
-                }`}
+                className={`relative px-2 py-1 transition-all duration-300 ${activeLink === item
+                  ? 'text-blue-400'
+                  : 'text-gray-300 hover:text-white'
+                  }`}
               >
                 {item}
                 {activeLink === item && (
@@ -59,11 +69,32 @@ const HomeSection = () => {
         </nav>
 
         {/* Call to action */}
-        <div className="hidden lg:block">
-          <button className="bg-gradient-to-r from-blue-400 to-purple-500 hover:from-blue-500 hover:to-purple-600 text-white px-8 py-3 rounded-full font-medium shadow-lg transition-all duration-300 hover:shadow-blue-400/40 hover:shadow-xl">
-            Get Quote
+        <div className="relative">
+          <button
+            onClick={() => setShowProfileMenu((prev) => !prev)}
+            className="bg-gradient-to-r from-blue-400 to-purple-500 hover:from-blue-500 hover:to-purple-600 text-white px-8 py-3 rounded-full font-medium shadow-lg transition-all duration-300 hover:shadow-blue-400/40 hover:shadow-xl"
+          >
+            Profile
           </button>
+
+          {showProfileMenu && (
+            <div className="absolute right-0 mt-2 w-56 bg-[#2d3748] border border-gray-700 rounded-xl shadow-lg py-2 z-50">
+              <a
+                href="/login"
+                className="block text-center px-5 py-3 mx-4 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 text-white font-medium shadow-md hover:from-blue-500 hover:to-purple-600 transition-all duration-300"
+              >
+                Sign In
+              </a>
+
+              <div className="block px-5 py-3 text-sm hover:bg-purple-500/20 transition-all duration-200">
+                <span className="text-white">New Customer?</span>{' '}
+                <a href="/signup" className="underline text-blue-400 hover:text-blue-300">Start here</a>
+              </div>
+
+            </div>
+          )}
         </div>
+
 
         {/* Mobile menu button */}
         <button className="md:hidden text-2xl text-blue-400 focus:outline-none">
@@ -102,7 +133,7 @@ const HomeSection = () => {
             <button className="group relative bg-gradient-to-r from-blue-400 to-purple-500 px-10 py-4 rounded-full font-medium overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
               <span className="relative z-10 text-white group-hover:text-white transition-colors duration-300">Shop Now</span>
               <span className="absolute inset-0 bg-[#1a202c] scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></span>
-              <svg className="w-5 h-5 ml-2 absolute right-3 top-1/2 -translate-y-1/2 text-white opacity-70 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+              <svg className="w-5 h-5 ml-2 absolute right-3 top-1/2 -translate-y-1/2 text-white opacity-70 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
             </button>
 
             <button className="relative group px-10 py-4 rounded-full font-medium overflow-hidden border border-blue-400/50 text-blue-400 hover:text-white transition-all duration-300">
@@ -138,9 +169,8 @@ const HomeSection = () => {
               {Array.from({ length: 9 }).map((_, i) => (
                 <span
                   key={i}
-                  className={`w-3 h-3 rounded-full opacity-70 ${
-                    i % 3 === 0 ? 'bg-blue-500' : i % 3 === 1 ? 'bg-purple-600' : 'bg-indigo-500'
-                  }`}
+                  className={`w-3 h-3 rounded-full opacity-70 ${i % 3 === 0 ? 'bg-blue-500' : i % 3 === 1 ? 'bg-purple-600' : 'bg-indigo-500'
+                    }`}
                   style={{
                     animationName: 'pulse',
                     animationDuration: `${2 + i * 0.2}s`,
