@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 
 import { graphqlHTTP } from 'express-graphql';
-import schema from './graphql/schema.js';
+import schema from './graphql/countries/schema.js';
 
 import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
