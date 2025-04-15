@@ -14,7 +14,7 @@ const Newsletter = () => {
     return re.test(String(email).toLowerCase());
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     if (!name.trim()) {
@@ -44,10 +44,37 @@ const Newsletter = () => {
       return;
     }
 
-    toast({
-      title: 'Success!',
-      description: 'Thank you for subscribing to our newsletter!',
-    });
+    try {
+      const response = await fetch('http://localhost:3836/api/mail/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        toast({
+          title: 'Success!',
+          description: result.message || 'Thank you for subscribing to our newsletter!',
+        });
+        setSubscribed(true);
+      } else {
+        toast({
+          title: 'Error',
+          description: result.error || 'Something went wrong. Please try again.',
+          variant: 'destructive',
+        });
+      }
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'Failed to connect to the server.',
+        variant: 'destructive',
+      });
+    }
 
     setSubscribed(true);
 
