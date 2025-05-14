@@ -48,7 +48,7 @@ const HomeSection = () => {
 
         {/* Navigation Links */}
         <nav className="hidden md:flex gap-16 text-lg font-medium">
-          {["Home", "About Us", "Services", "Blog", "Contact Us"].map(
+          {["Home", "About Us", "Products", "Blog", "Contact Us"].map(
             (item) => (
               <a
                 key={item}
